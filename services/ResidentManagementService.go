@@ -14,6 +14,7 @@ type ResidentService struct {
 
 func NewResidentManagementService(r repositories.ResidentRepository) *ResidentService {
 	return &ResidentService{residentRepository: r}
+
 }
 
 func (rs *ResidentService) OnboardNewResident(request requests.OnboardResidentRequest) (responses.OnboardResidentResponse, error) {
