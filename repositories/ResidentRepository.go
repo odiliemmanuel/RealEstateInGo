@@ -88,3 +88,27 @@ func (r residentRepository) FindAll() ([]models.Resident, error) {
 	}
 	return residents, nil
 }
+
+func (r residentRepository) DeleteById(residentId string) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	// Convert string → ObjectID
+	objID, err := primitive.ObjectIDFromHex(residentId)
+	if err != nil {
+		return err
+	}
+
+	// Delete
+	result, err := r.collection.DeleteOne(ctx, bson.M{"_id": objID})
+	if err != nil {
+		return err
+	}
+
+	// Check if anything was deleted
+	if result.DeletedCount == 0 {
+		return mongo.ErrNoDocuments
+	}
+
+	return nil
+}
