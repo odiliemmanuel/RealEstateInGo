@@ -43,7 +43,7 @@ func (r residentRepository) SaveGatePass(gatPass models.GatePass) (models.GatePa
 }
 
 func (r residentRepository) FindGatePassById(gatePassId string) (models.GatePass, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 12*time.Second)
 	defer cancel()
 
 	objID, err := primitive.ObjectIDFromHex(gatePassId)
