@@ -53,7 +53,7 @@ func (r residentRepository) FindGatePassById(gatePassId string) (models.GatePass
 
 	var gatePass models.GatePass
 
-	err = r.collection.FindOne(ctx, bson.M{"_id": objID}).Decode(&resident)
+	err = r.collection.FindOne(ctx, bson.M{"_id": objID}).Decode(&gatePass)
 	if err != nil {
 		return models.GatePass{}, err
 	}
@@ -78,7 +78,7 @@ func (r residentRepository) FindAllGatePasses() ([]models.GatePass, error) {
 }
 
 func (r residentRepository) DeleteGatePassById(gatePasId string) error {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 12*time.Second)
 	defer cancel()
 
 	// Convert string → ObjectID
